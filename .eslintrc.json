@@ -1,0 +1,51 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint",
+        "eslint-plugin-prettier"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "eslint-config-prettier",
+        "plugin:jsdoc/recommended"
+    ],
+    "rules": {
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/consistent-type-definitions": [
+            "error",
+            "type"
+        ],
+        "@typescript-eslint/no-explicit-any": [
+            "off"
+        ],
+        // "require-jsdoc": [
+        //     "error",
+        //     {
+        //         "require": {
+        //             "FunctionDeclaration": true,
+        //             "MethodDefinition": true,
+        //             "ClassDeclaration": true,
+        //             "ArrowFunctionExpression": true,
+        //             "FunctionExpression": true
+        //         }
+        //     }
+        // ],
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ],
+        "no-console": "warn"
+    },
+    "env": {
+        "browser": true,
+        "es2021": true
+    }
+}

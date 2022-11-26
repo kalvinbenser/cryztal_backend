@@ -634,7 +634,8 @@ export async function updatePartnerAppById(req: any, res: Response): Promise<Res
         const content = req.body;
         //console.log('content', content.isShop);
         content.isShop = 2;
-        content.store_status = 0;
+
+        content.store_status = 1;
         content.created_on = CurrentDate.toString();
 
         const response = await PartnerRegistrationService.updatePartnerApp(content, id);

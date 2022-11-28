@@ -629,6 +629,7 @@ export async function partnerForgetPassword(req: any, res: Response): Promise<Re
  */
 export async function updatePartnerAppById(req: any, res: Response): Promise<Response<any, Record<string, any>>> {
     try {
+        const referenceCode = referralCodeGenerator.custom('uppercase', 6, 4, 'temitope');
         const PartnerRegistrationService = new PARTNER_SERVICE.PartnerService();
         const id = +req.params.id;
         const content = req.body;
@@ -637,7 +638,7 @@ export async function updatePartnerAppById(req: any, res: Response): Promise<Res
 
         content.store_status = 1;
         content.created_on = CurrentDate.toString();
-
+        content.reference_code = referenceCode;
         const response = await PartnerRegistrationService.updatePartnerApp(content, id);
         //console.log('req', req.files);
         if (req.files != null) {

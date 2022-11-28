@@ -60,6 +60,7 @@ export class PartnerService {
         partner.isShop = 1;
         partner.admin_create = 1;
         partner.password = getPassword;
+        partner.reference_code = req.reference_code;
 
         try {
             return this.partnerRepository.save(partner);

@@ -1,4 +1,4 @@
-import { DEALS_SERVICE } from './../../../service';
+import { DEALS_SERVICE, PARTNER_SERVICE } from './../../../service';
 import { Request, Response } from 'express';
 import log from '../../../logger/logger';
 import { StatusCode } from '../../../constants/HttpStatusCode';
@@ -10,13 +10,33 @@ import * as moment from 'moment';
 
 /**
  *
+ * @param min
+ * @param max
+ */
+async function getRandomArbitrary(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+}
+
+/**
+ *
  * @param {Request} req  -- Express Request -BODY/PARAMS
  * @param {Response} res -- Express response from DB
  */
 export async function createDealsHandler(req: any, res: Response): Promise<Response<any, Record<string, any>>> {
     try {
         const dealService = new DEALS_SERVICE.DealsService();
-        const response = await dealService.register(req.body);
+        const partnerService = new PARTNER_SERVICE.PartnerService();
+        const id = req.body.partner_id;
+
+        const partner = await partnerService.getPartnerId(id);
+
+        const data = req.body;
+        const dealRandom = await getRandomArbitrary(10, 99);
+        const deal_reference_code = partner.reference_code + dealRandom;
+
+        data.reference_code = deal_reference_code;
+
+        const response = await dealService.register(data);
         await dealService.dealimageUpload(req, response?.id);
         RESPONSE.Success.Message = MESSAGE.REGISTRATION_SUCCESS;
         RESPONSE.Success.data = { id: response?.id };

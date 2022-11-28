@@ -22,8 +22,14 @@ export async function createSubCategoryHandler(
         const subCategoryService = new SUB_SERVICE.SubCategoryService();
         const checkSubCat = await subCategoryService.checkSubCatExits(req.body);
         if (checkSubCat) {
-            RESPONSE.Success.Message = 'already exit';
-            RESPONSE.Success.data = [];
+            const validateData = {
+                Status: true,
+                Success: false,
+                Type: 'ValidationError',
+                Message: ['sub category is already exits'],
+                Error: 'Bad Request',
+            };
+            res.send(validateData);
         } else {
             const response = await subCategoryService.create(req.body);
             RESPONSE.Success.Message = MESSAGE.SUCCESS;

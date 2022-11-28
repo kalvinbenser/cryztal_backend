@@ -89,9 +89,9 @@ export class PartnerService {
         partner.phone_number = req.phone_number;
         partner.password = hashPassword;
         partner.country = req.location;
-        partner.state = req.user_state;
-        partner.zipcode = req.user_zipcode;
-        partner.suburb = req.user_suburb;
+        partner.user_state = req.user_state;
+        partner.user_zipcode = req.user_zipcode;
+        partner.user_suburb = req.user_suburb;
 
         try {
             return this.partnerRepository.save(partner);

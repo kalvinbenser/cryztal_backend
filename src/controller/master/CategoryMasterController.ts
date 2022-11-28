@@ -18,8 +18,16 @@ export async function createCategoryHandler(req: Request, res: Response): Promis
         const categoryService = new CATEGORY_SERVICE.CategoryMasterService();
         const checkuniqueCategory = await categoryService.checkuniqueCategory(req.body.category_master);
         if (checkuniqueCategory) {
-            RESPONSE.Success.Message = ' already exit';
-            RESPONSE.Success.data = [];
+            // RESPONSE.Success.Message = ' already exit';
+            // RESPONSE.Success.data = [];
+            const ValidateData = {
+                Status: true,
+                Success: false,
+                Type: 'ValidationError',
+                Message: ['category is already exits'],
+                Error: 'Bad Request',
+            };
+            res.send(ValidateData);
         } else {
             const response = await categoryService.create(req.body);
             RESPONSE.Success.Message = MESSAGE.SUCCESS;

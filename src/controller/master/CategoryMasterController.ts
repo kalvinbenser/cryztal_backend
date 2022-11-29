@@ -17,6 +17,7 @@ export async function createCategoryHandler(req: Request, res: Response): Promis
     try {
         const categoryService = new CATEGORY_SERVICE.CategoryMasterService();
         const checkuniqueCategory = await categoryService.checkuniqueCategory(req.body.category_master);
+        console.log('checkuniqueCategory', checkuniqueCategory);
         if (checkuniqueCategory) {
             // RESPONSE.Success.Message = ' already exit';
             // RESPONSE.Success.data = [];
@@ -32,6 +33,7 @@ export async function createCategoryHandler(req: Request, res: Response): Promis
             const response = await categoryService.create(req.body);
             RESPONSE.Success.Message = MESSAGE.SUCCESS;
             RESPONSE.Success.data = { category_id: response?.category_id };
+            return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         }
     } catch (e: any) {
         RESPONSE.Failure.Message = e.message;

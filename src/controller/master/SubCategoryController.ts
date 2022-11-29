@@ -34,6 +34,7 @@ export async function createSubCategoryHandler(
             const response = await subCategoryService.create(req.body);
             RESPONSE.Success.Message = MESSAGE.SUCCESS;
             RESPONSE.Success.data = { id: response?.sub_category_id };
+            return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         }
     } catch (e: any) {
         RESPONSE.Failure.Message = e.message;

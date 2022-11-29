@@ -202,14 +202,21 @@ export class PartnerService {
      * @param user_state
      * @param user_zipcode
      * @param user_suburb
+     * @param ids
      * @returns {any} -- DB response SQL Response
      */
-    async reportUserFilterDropdown(user_state: string, user_zipcode: string, user_suburb: string): Promise<any> {
+    async reportUserFilterDropdown(
+        user_state: string,
+        user_zipcode: string,
+        user_suburb: string,
+        ids: number,
+    ): Promise<any> {
         try {
-            return this.partnerRepository.query('call cryztal_test_v1.sp_reportUserFilterDropdown(?,?,?)', [
+            return this.partnerRepository.query('call cryztal_test_v1.sp_reportUserFilterDropdown(?,?,?,?)', [
                 user_state,
                 user_zipcode,
                 user_suburb,
+                ids,
             ]);
         } catch (error) {
             log.error(error);

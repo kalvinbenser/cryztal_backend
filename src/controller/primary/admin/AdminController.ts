@@ -349,6 +349,7 @@ export async function reportUserFilterDropdown(
             req.body.user_state,
             req.body.user_zipcode,
             req.body.user_suburb,
+            req.body.ids,
         );
         const result = _.map(response[0], (obj) => {
             return _.omit(obj, ['created_by', 'updated_by', 'updated_on', 'delete_status', 'password']);

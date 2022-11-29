@@ -201,6 +201,26 @@ export class PartnerService {
      
      * @param user_state
      * @param user_zipcode
+     * @param user_suburb
+     * @returns {any} -- DB response SQL Response
+     */
+    async reportUserFilterDropdown(user_state: string, user_zipcode: string, user_suburb: string): Promise<any> {
+        try {
+            return this.partnerRepository.query('call cryztal_test_v1.sp_reportUserFilterDropdown(?,?,?)', [
+                user_state,
+                user_zipcode,
+                user_suburb,
+            ]);
+        } catch (error) {
+            log.error(error);
+            return error;
+        }
+    }
+
+    /**
+     
+     * @param user_state
+     * @param user_zipcode
      * @param location
      * @param user_suburb
      * @param created_on
@@ -613,6 +633,23 @@ export class PartnerService {
         }
     }
 
+    /**
+     *
+     * @param {string} email -- From Request body object
+     * @returns {any} -- DB response SQL Response
+     */
+    async checkExistingPartnerEmail(email: string): Promise<any> {
+        try {
+            return this.partnerRepository.findOne({
+                where: {
+                    email: email,
+                },
+            });
+        } catch (error) {
+            log.error(error);
+            return error;
+        }
+    }
     /**
      *
      * @param {string} password -- From Request body object

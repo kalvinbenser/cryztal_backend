@@ -1,4 +1,4 @@
-import { object, string, array, bool, number, boolean } from 'yup';
+import { object, string, bool, number, boolean } from 'yup';
 import * as PATTERN from '../../constants/regExp';
 
 export const createPartnerSchema1 = object({
@@ -113,10 +113,7 @@ const ChangePassword = {
 };
 const ForgerPassword = {
     body: object({
-        change_Password: string()
-            .matches(PATTERN.PASSWORD, 'password too weak')
-            .required('change_Password is Required'),
-        confirm_password: string().required('confirm_password'),
+        email: string().required('email is required'),
     }),
 };
 
@@ -126,7 +123,6 @@ export const partnerChangePassword = object({
 });
 export const partnerForgetPassword = object({
     ...ForgerPassword,
-    ...params,
 });
 
 export const UpdatePartner = object({

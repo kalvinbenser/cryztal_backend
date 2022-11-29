@@ -330,7 +330,9 @@ export class userService {
             // });
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
-            return this.dealsRepository.query(`select * from c_tbl_pm_partner_deals where 	partnerIdId=${id}`);
+            return this.dealsRepository.query(
+                `select * from c_tbl_pm_partner_deals where 	partnerIdId=${id} and status=1`,
+            );
         } catch (error) {
             log.error(error);
             return error;

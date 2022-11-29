@@ -332,6 +332,41 @@ export async function getAllReportPartnersUserFilterHandler(
         return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.Failure);
     }
 }
+
+/**
+ *
+ * @param {Request} req -- Request handler from Express.
+ * @param {Response} res -- Response sent to express from DB.
+ * @returns {Response} -- Fetched DATA JSON.
+ */
+export async function reportUserFilterDropdown(
+    req: Request,
+    res: Response,
+): Promise<Response<any, Record<string, any>>> {
+    try {
+        const partnerRegistrationService = new PARTNER_SERVICE.PartnerService();
+        const response = await partnerRegistrationService.reportUserFilterDropdown(
+            req.body.user_state,
+            req.body.user_zipcode,
+            req.body.user_suburb,
+        );
+        const result = _.map(response[0], (obj) => {
+            return _.omit(obj, ['created_by', 'updated_by', 'updated_on', 'delete_status', 'password']);
+        });
+        if (result) {
+            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            RESPONSE.Success.data = result;
+            return res.status(StatusCode.CREATED.code).send(RESPONSE.Success);
+        } else {
+            RESPONSE.Failure.Message = MESSAGE.INVALID_ID;
+            return res.status(StatusCode.FORBIDDEN.code).send(RESPONSE.Failure);
+        }
+    } catch (e: any) {
+        RESPONSE.Failure.Message = e.message;
+        log.error(e);
+        return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.Failure);
+    }
+}
 /**
  *
  * @param {Request} req -- Request handler from Express.

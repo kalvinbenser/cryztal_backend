@@ -158,6 +158,8 @@ router.post('/getPartnersFilterList', auth, HANDLER.ADMIN_HANDLER.getAllReportPa
 // ** GET API
 router.post('/getPartnersDropDownFilter', HANDLER.ADMIN_HANDLER.getAllReportPartnersDropDownFilterHandler);
 router.post('/getUserFilterList', auth, HANDLER.ADMIN_HANDLER.getAllReportPartnersUserFilterHandler);
+router.post('/reportUserFilterDropdown', auth, HANDLER.ADMIN_HANDLER.reportUserFilterDropdown);
+
 // ** GET API
 router.post('/getUserFilterReportList', auth, HANDLER.ADMIN_HANDLER.getAllReportPartnersUserFilterHandler);
 // ** GET API
@@ -310,7 +312,7 @@ router.put(
 );
 //** PUT API*/
 router.put(
-    '/partnerForgetPassword/:id',
+    '/partnerForgetPassword',
     validateRequest(SCHEMA.PARTNER_SCHEMA.partnerForgetPassword),
     HANDLER.PARTNER_HANDLER.partnerForgetPassword,
 );

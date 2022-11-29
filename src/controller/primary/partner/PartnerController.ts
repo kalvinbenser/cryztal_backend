@@ -591,30 +591,18 @@ export async function partnerChangePassword(req: any, res: Response): Promise<Re
 export async function partnerForgetPassword(req: any, res: Response): Promise<Response<any, Record<string, any>>> {
     try {
         const partnerLoginService = new PARTNER_SERVICE.PartnerService();
-        const confirm_password = req.body.confirm_password;
-        // const previous_password = req.body.previous_password;
-        const change_Password = req.body.change_Password;
+        const email = req.body.email;
 
-        const id = req.params.id;
-        const response = await partnerLoginService.checkExistingPartner(id);
-        if (change_Password.length >= 8 && confirm_password.length >= 8) {
-            if (confirm_password === change_Password) {
-                const result = await partnerLoginService.partnerChangePassword(change_Password, id);
-                if (result) {
-                    RESPONSE.Success.Message = MESSAGE.PASSWORD_CHANGE;
-                    return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
-                } else {
-                    RESPONSE.Success.Message = MESSAGE.SUCCESS;
-                    RESPONSE.Success.data = { response };
-                    return res.status(StatusCode.NO_CONTENT.code).send(RESPONSE.Success);
-                }
-            } else {
-                RESPONSE.Success.Message = MESSAGE.DOES_NOT_MATCH;
-                return res.status(StatusCode.NON_AUTHORITATIVE_INFORMATION.code).send(RESPONSE.Success);
-            }
+        const response = await partnerLoginService.checkExistingPartnerEmail(email);
+
+        if (response) {
+            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            RESPONSE.Success.data = response;
+            return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         } else {
-            RESPONSE.Failure.Message = MESSAGE.PASSWORD_8;
-            return res.status(StatusCode.NOT_FOUND.code).send(RESPONSE.Failure);
+            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            RESPONSE.Success.data = response;
+            return res.status(StatusCode.NO_CONTENT.code).send(RESPONSE.Success);
         }
     } catch (e: any) {
         RESPONSE.Failure.Message = e.message;

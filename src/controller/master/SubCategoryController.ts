@@ -35,8 +35,6 @@ export async function createSubCategoryHandler(
             RESPONSE.Success.Message = MESSAGE.SUCCESS;
             RESPONSE.Success.data = { id: response?.sub_category_id };
         }
-
-        return res.status(StatusCode.CREATED.code).send(RESPONSE.Success);
     } catch (e: any) {
         RESPONSE.Failure.Message = e.message;
         log.error(e);

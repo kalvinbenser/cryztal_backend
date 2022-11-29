@@ -33,8 +33,6 @@ export async function createCategoryHandler(req: Request, res: Response): Promis
             RESPONSE.Success.Message = MESSAGE.SUCCESS;
             RESPONSE.Success.data = { category_id: response?.category_id };
         }
-
-        return res.status(StatusCode.CREATED.code).send(RESPONSE.Success);
     } catch (e: any) {
         RESPONSE.Failure.Message = e.message;
         log.error(e);

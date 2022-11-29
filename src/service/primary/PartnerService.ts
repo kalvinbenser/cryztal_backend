@@ -431,9 +431,9 @@ export class PartnerService {
                     secondary_contact: req.secondary_contact,
                     contact_person_name: req.contact_person_name,
                     store_status: req.store_status,
+                    discount: req.discount,
                     latitude: req.latitude,
                     longitude: req.longitude,
-                    discount: req.discount,
                     updated_on: CurrentDate,
                 },
             );

@@ -226,6 +226,35 @@ export class PartnerService {
 
     /**
      
+     * @param category
+     * @param state
+     * @param suburb
+     * @param zipcode
+     * @param ids
+     * @returns {any} -- DB response SQL Response
+     */
+    async reportFilterPartnerDropdown(
+        category: string,
+        state: string,
+        suburb: string,
+        zipcode: string,
+        ids: number,
+    ): Promise<any> {
+        try {
+            return this.partnerRepository.query('call cryztal_test_v1.sp_reportFilterPartnerDropdown(?,?,?,?)', [
+                category,
+                state,
+                suburb,
+                zipcode,
+                ids,
+            ]);
+        } catch (error) {
+            log.error(error);
+            return error;
+        }
+    }
+    /**
+     
      * @param user_state
      * @param user_zipcode
      * @param location

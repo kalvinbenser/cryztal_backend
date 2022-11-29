@@ -159,7 +159,7 @@ router.post('/getPartnersFilterList', auth, HANDLER.ADMIN_HANDLER.getAllReportPa
 router.post('/getPartnersDropDownFilter', HANDLER.ADMIN_HANDLER.getAllReportPartnersDropDownFilterHandler);
 router.post('/getUserFilterList', auth, HANDLER.ADMIN_HANDLER.getAllReportPartnersUserFilterHandler);
 router.post('/reportUserFilterDropdown', auth, HANDLER.ADMIN_HANDLER.reportUserFilterDropdown);
-
+router.post('/reportFilterPartnerDropdown', auth, HANDLER.ADMIN_HANDLER.reportFilterPartnerDropdown);
 // ** GET API
 router.post('/getUserFilterReportList', auth, HANDLER.ADMIN_HANDLER.getAllReportPartnersUserFilterHandler);
 // ** GET API

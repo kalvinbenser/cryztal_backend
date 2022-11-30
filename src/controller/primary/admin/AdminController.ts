@@ -311,17 +311,41 @@ export async function getAllReportPartnersUserFilterHandler(
         const response = await partnerRegistrationService.reportUserFilterPartner(
             req.body.user_state,
             req.body.user_zipcode,
-            req.body.location,
             req.body.user_suburb,
-            req.body.created_on,
         );
         const result = _.map(response[0], (obj) => {
             return _.omit(obj, ['created_by', 'updated_by', 'updated_on', 'delete_status', 'password']);
         });
+
+        const stateResult = _.map(response[0], (obj) => {
+            return _.pick(obj, ['state']);
+        });
+
+        const suburbResult = _.map(response[0], (obj) => {
+            return _.pick(obj, ['suburb']);
+        });
+
+        const zipcodeResult = _.map(response[0], (obj) => {
+            return _.pick(obj, ['zipcode']);
+        });
+
+        const state = _.uniqBy(stateResult, 'state');
+        const suburb = _.uniqBy(suburbResult, 'suburb');
+        const zipcode = _.uniqBy(zipcodeResult, 'zipcode');
+
         if (result) {
-            RESPONSE.Success.Message = MESSAGE.SUCCESS;
-            RESPONSE.Success.data = result;
-            return res.status(StatusCode.CREATED.code).send(RESPONSE.Success);
+            const data = {
+                Status: true,
+                Success: true,
+                Message: 'SUCCESS',
+                data: result,
+                dropdownData: {
+                    state: state,
+                    suburb: suburb,
+                    zipcode: zipcode,
+                },
+            };
+            return res.status(StatusCode.CREATED.code).send(data);
         } else {
             RESPONSE.Failure.Message = MESSAGE.INVALID_ID;
             return res.status(StatusCode.FORBIDDEN.code).send(RESPONSE.Failure);

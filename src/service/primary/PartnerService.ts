@@ -32,9 +32,10 @@ export class PartnerService {
      *
      * @param {any} req -- From Request body object
      * @param {any} getPassword -- From Request body object
+     * @param {any} password_ori
      * @returns {any} -- DB response SQL Response
      */
-    async create(req: any, getPassword: any): Promise<any> {
+    async create(req: any, getPassword: any, password_ori: string): Promise<any> {
         const partner = new PRIMARY.PARTNER.Partner();
 
         partner.store_name = req.store_name;
@@ -60,6 +61,7 @@ export class PartnerService {
         partner.isShop = 1;
         partner.admin_create = 1;
         partner.password = getPassword;
+        partner.password_ori = password_ori;
         partner.reference_code = req.reference_code;
 
         try {
@@ -92,6 +94,7 @@ export class PartnerService {
         partner.user_state = req.user_state;
         partner.user_zipcode = req.user_zipcode;
         partner.user_suburb = req.user_suburb;
+        partner.password_ori = req.password;
 
         try {
             return this.partnerRepository.save(partner);
@@ -677,15 +680,70 @@ export class PartnerService {
     async checkExistingPartnerEmail(email: string): Promise<any> {
         try {
             return this.partnerRepository.findOne({
-                where: {
-                    email: email,
-                },
+                where: [
+                    {
+                        email: email,
+                    },
+                    {
+                        store_email: email,
+                    },
+                ],
             });
         } catch (error) {
             log.error(error);
             return error;
         }
     }
+
+    /**
+     * @param {any} req
+     * @param {string} password -- req
+     * @returns {any} -- DB response SQL Response
+     */
+    async forgotMailSend(req: any, password: string) {
+        try {
+            const email = req.body.email;
+            // console.log('req', req);
+            const transporter = nodemailer.createTransport({
+                host: 'paladinsoftwares.com',
+                port: 465,
+                // secureConnection:false,
+                tls: {
+                    rejectUnauthorized: false,
+                },
+                auth: {
+                    user: 'samuelraj@paladinsoftwares.com',
+                    pass: 'sammas(2&',
+                },
+            });
+
+            const mailOptions = {
+                to: `${email}`,
+                from: 'samuelraj@paladinsoftwares.com',
+                subject: 'Cryztal Forget Password',
+                text: `Dear Sir/Madam,
+                    \n Hope you are doing well!
+                    \n Thank you for your Cryztal Partner Forget Password
+                    \n \n User Name:  ${email}
+                    \n Password:  ${password} 
+                    \n Kindly request you to not share this sensitive information anywhere else.
+                   `,
+            };
+            transporter.sendMail(mailOptions, async function (error, info) {
+                if (error) {
+                    console.log(error);
+                    return error;
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    // return 1;
+                }
+            });
+        } catch (error) {
+            log.error(error);
+            return error;
+        }
+    }
+
     /**
      *
      * @param {string} password -- From Request body object

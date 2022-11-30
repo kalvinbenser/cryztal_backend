@@ -596,13 +596,14 @@ export async function partnerForgetPassword(req: any, res: Response): Promise<Re
         const response = await partnerLoginService.checkExistingPartnerEmail(email);
 
         if (response) {
+            await partnerLoginService.forgotMailSend(req, response.password_ori);
             RESPONSE.Success.Message = MESSAGE.SUCCESS;
-            RESPONSE.Success.data = response;
+            RESPONSE.Success.data = [{ message: 'password is send to your mail' }];
             return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         } else {
-            RESPONSE.Success.Message = MESSAGE.SUCCESS;
-            RESPONSE.Success.data = response;
-            return res.status(StatusCode.NO_CONTENT.code).send(RESPONSE.Success);
+            RESPONSE.Success.Message = 'email not found';
+            RESPONSE.Success.data = [];
+            return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         }
     } catch (e: any) {
         RESPONSE.Failure.Message = e.message;

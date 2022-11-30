@@ -82,6 +82,9 @@ export class Partner {
     password: string;
 
     @Column({ type: 'varchar', nullable: true })
+    password_ori: string;
+
+    @Column({ type: 'varchar', nullable: true })
     reference_code?: string;
 
     @Column({ type: 'varchar', nullable: true })

@@ -21,6 +21,7 @@ export type Partner = {
     primary_contact: string;
     secondary_contact: string;
     password: string;
+    password_ori: string;
     reference_code: string;
     discount: string;
     admin_create: number;

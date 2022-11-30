@@ -56,7 +56,7 @@ export async function adminPartnerRegistration(req: any, res: Response): Promise
         const data = req.body;
         data.reference_code = referenceCode;
         const getPassword = await passwordGenerate();
-        const response = await partnerService.create(data, getPassword[1]);
+        const response = await partnerService.create(data, getPassword[1], getPassword[0]);
 
         partnerService.adminPartnerMailSend(req.body, getPassword[0]);
         const value = response.id;

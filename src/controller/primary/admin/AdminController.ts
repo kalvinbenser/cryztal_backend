@@ -235,20 +235,61 @@ export async function getAllReportPartnersFilterHandler(
             req.body.category,
             req.body.state,
             req.body.suburb,
-            req.body.address,
             req.body.zipcode,
-            req.body.created_on,
         );
+
         for (const i in response[0]) {
             response[0][i].type_of_store = JSON.parse(response[0][i].type_of_store);
         }
+
         const result = _.map(response[0], (obj) => {
             return _.omit(obj, ['created_by', 'updated_by', 'updated_on', 'delete_status', 'password']);
         });
+        //----------------------    category   --------------------------\\
+
+        const cat = [];
+        for (const i in response[0]) {
+            cat.push(...response[0][i].type_of_store);
+        }
+        const getUniqueCat = _.uniq(cat);
+        const getDa = [];
+        getUniqueCat.forEach((element) => {
+            getDa.push({ category: element });
+        });
+        //------------------------------------------------------------------\\
+        //-----------------------------state -------------------------------\\
+        const stateResult = _.map(response[0], (obj) => {
+            return _.pick(obj, ['state']);
+        });
+        const state = _.uniqBy(stateResult, 'state');
+        //------------------------------------------------------------------\\
+        //-----------------------------  suburb  ---------------------------\\
+        const suburbResult = _.map(response[0], (obj) => {
+            return _.pick(obj, ['suburb']);
+        });
+
+        const suburb = _.uniqBy(suburbResult, 'suburb');
+        //--------------------------------------------------------------------\\
+        //-------------------------  zipcode  ---------------------------------\\
+        const zipcodeResult = _.map(response[0], (obj) => {
+            return _.pick(obj, ['zipcode']);
+        });
+        const zipcode = _.uniqBy(zipcodeResult, 'zipcode');
+        //------------------------------------------------------------------------\\
         if (result) {
-            RESPONSE.Success.Message = MESSAGE.SUCCESS;
-            RESPONSE.Success.data = result;
-            return res.status(StatusCode.CREATED.code).send(RESPONSE.Success);
+            const data = {
+                Status: true,
+                Success: true,
+                Message: 'SUCCESS',
+                data: result,
+                dropdownData: {
+                    category: getDa,
+                    state: state,
+                    suburb: suburb,
+                    zipcode: zipcode,
+                },
+            };
+            return res.status(StatusCode.CREATED.code).send(data);
         } else {
             RESPONSE.Failure.Message = MESSAGE.INVALID_ID;
             return res.status(StatusCode.FORBIDDEN.code).send(RESPONSE.Failure);

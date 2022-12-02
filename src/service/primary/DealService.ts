@@ -73,7 +73,7 @@ export class DealsService {
                 deal_data.image = image_data;
 
                 try {
-                    return this.dealRepository.save(deal_data);
+                    return this.dealRepository.update({ id: deal_id }, deal_data);
                 } catch (error) {
                     log.error(error);
                     return error;

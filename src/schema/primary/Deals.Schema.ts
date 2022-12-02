@@ -1,4 +1,4 @@
-import { object, string, number, array, bool } from 'yup';
+import { object, string, number, bool } from 'yup';
 const payload = {
     body: object({
         partner_id: number().required('partner_id is required'),
@@ -16,14 +16,12 @@ const payload = {
 
 const uploadPayload = {
     body: object({
-        category: string().required('category is required'),
-        sub_category: string().required('sub_category  is required'),
-        deal_name: string().required('deal_name is required'),
-        offer: string().required('offer is required'),
-        discount_description: string().required('discount_description is required'),
-        from_date: string().required('from_date is required'),
-        to_date: string().required('to_date is required'),
-        image: string().required('image is required'),
+        category: string().notRequired(),
+        sub_category: string().notRequired(),
+        deal_name: string().notRequired(),
+        discount_description: string().notRequired(),
+        from_date: string().notRequired(),
+        to_date: string().notRequired(),
         reference_code: string().notRequired(),
     }),
 };
@@ -32,11 +30,7 @@ const uploadAdminPayload = {
         category: string().notRequired(),
         sub_category: string().notRequired(),
         deal_name: string().notRequired(),
-        offer: string().notRequired(),
         discount_description: string().notRequired(),
-        from_date: string().notRequired(),
-        to_date: string().notRequired(),
-        image: array().of(string()).notRequired(),
         reference_code: string().notRequired(),
     }),
 };

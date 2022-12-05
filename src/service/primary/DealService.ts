@@ -162,7 +162,6 @@ export class DealsService {
                     from_date: req.from_date,
                     to_date: req.to_date,
                     image: req.image,
-                    reference_code: req.reference_code,
                     updated_by: req.id,
                     updated_on: CurrentDate,
                 },

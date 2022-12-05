@@ -8,6 +8,7 @@ import * as SUB_HANDLER from './master/SubCategoryController';
 import * as USER_HANDLER from './primary/user/UserController';
 import * as WISH_LIST_HANDLER from './primary/wishList/WishListController';
 import * as STATE_HANDLER from './master/StateController';
+import * as IMAGE_UPLOAD_HANDLER from './primary/imageUpload/imageUploadController';
 
 export {
     PARTNER_HANDLER,
@@ -20,4 +21,5 @@ export {
     USER_HANDLER,
     WISH_LIST_HANDLER,
     STATE_HANDLER,
+    IMAGE_UPLOAD_HANDLER,
 };

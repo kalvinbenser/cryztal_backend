@@ -53,8 +53,8 @@ export class PartnerService {
         partner.zipcode = req.zipcode;
         partner.discount = req.discount;
         partner.shop_description = req.shop_description;
-        partner.shop_logo = 'logo.jpg';
-        partner.shop_images = ['image1.jpg', 'image2.jpg'];
+        partner.shop_logo = req.shop_logo;
+        partner.shop_images = req.shop_images;
         partner.latitude = req.latitude;
         partner.longitude = req.longitude;
         partner.store_status = 1;

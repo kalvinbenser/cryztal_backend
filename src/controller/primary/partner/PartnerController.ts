@@ -597,11 +597,11 @@ export async function partnerForgetPassword(req: any, res: Response): Promise<Re
 
         if (response) {
             await partnerLoginService.forgotMailSend(req, response.password_ori);
-            RESPONSE.Success.Message = MESSAGE.SUCCESS;
-            RESPONSE.Success.data = [{ message: 'password is send to your mail' }];
+            RESPONSE.Success.Message = 'Password is send to your mail';
+            RESPONSE.Success.data = [];
             return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         } else {
-            RESPONSE.Success.Message = 'email not found';
+            RESPONSE.Success.Message = 'Email not registered';
             RESPONSE.Success.data = [];
             return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         }

@@ -84,7 +84,6 @@ export class PartnerService {
         const password = req.password || 'password';
         const hashPassword = await bcrypt.hash(password, salt);
         const partner = new PRIMARY.PARTNER.Partner();
-        req.password = hashPassword;
 
         partner.name = req.name;
         partner.email = req.email;

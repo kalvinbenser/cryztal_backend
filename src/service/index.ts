@@ -8,7 +8,7 @@ import * as ADMIN_SERVICE from './primary/AdminService';
 import * as USER_SERVICE from './primary/UserService';
 import * as WISHLIST_SERVICE from './primary/WishListService';
 import * as STATE_SERVICE from './master/StateService';
-
+import * as IMAGE_UPLOAD_SERVICE from './primary/imageUploadService';
 export {
     DEALS_SERVICE,
     PARTNER_SERVICE,
@@ -20,4 +20,5 @@ export {
     USER_SERVICE,
     WISHLIST_SERVICE,
     STATE_SERVICE,
+    IMAGE_UPLOAD_SERVICE,
 };

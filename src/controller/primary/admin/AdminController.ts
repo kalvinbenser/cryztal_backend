@@ -59,9 +59,9 @@ export async function adminPartnerRegistration(req: any, res: Response): Promise
         const response = await partnerService.create(data, getPassword[1], getPassword[0]);
 
         partnerService.adminPartnerMailSend(req.body, getPassword[0]);
-        const value = response.id;
-        await partnerService.shopImageUpload(req, value);
-        await partnerService.shopLogo(req, value);
+        // const value = response.id;
+        // await partnerService.shopImageUpload(req, value);
+        // await partnerService.shopLogo(req, value);
         if (response) {
             RESPONSE.Success.Message = MESSAGE.SUCCESS;
             RESPONSE.Success.data = { id: response?.id };

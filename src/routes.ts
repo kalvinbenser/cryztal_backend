@@ -311,7 +311,7 @@ router.put(
     HANDLER.PARTNER_HANDLER.partnerChangePassword,
 );
 //** PUT API*/
-router.put(
+router.post(
     '/partnerForgetPassword',
     validateRequest(SCHEMA.PARTNER_SCHEMA.partnerForgetPassword),
     HANDLER.PARTNER_HANDLER.partnerForgetPassword,

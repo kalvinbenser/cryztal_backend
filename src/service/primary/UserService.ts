@@ -656,6 +656,7 @@ export class userService {
      * @param {string} category --
      * @param {string} sub_category --
      * @param {string} discount --discount
+     * @param kilometre
      * @returns {any} -- DB response SQL Response
      */
     async getAdvanceFilter(
@@ -669,9 +670,10 @@ export class userService {
         category: string,
         sub_category: string,
         discount: string,
+        kilometre: string,
     ): Promise<any> {
         try {
-            return this.partnerRepository.query('call cryztal_test_v1.sp_advanceFilter(?,?,?,?,?,?,?,?,?,?)', [
+            return this.partnerRepository.query('call cryztal_test_v1.sp_customTabSearch(?,?,?,?,?,?,?,?,?,?,?)', [
                 latitude,
                 longitude,
                 filter_keyword,
@@ -682,6 +684,7 @@ export class userService {
                 category,
                 sub_category,
                 discount,
+                kilometre,
             ]);
         } catch (error) {
             log.error(error);

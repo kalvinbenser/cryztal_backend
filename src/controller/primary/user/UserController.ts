@@ -650,6 +650,7 @@ export async function getAdvanceFilter(req: Request, res: Response): Promise<Res
         const state = req.body.state;
         const post_code = req.body.post_code;
         const range_km = req.body.range_km;
+        const kilometre = req.body.kilometre;
         const category = req.body.category;
         const sub_category = req.body.sub_category;
         const discount = req.body.discount;
@@ -661,6 +662,7 @@ export async function getAdvanceFilter(req: Request, res: Response): Promise<Res
             state,
             post_code,
             range_km,
+            kilometre,
             category,
             sub_category,
             discount,

@@ -163,7 +163,7 @@ router.post('/reportFilterPartnerDropdown', auth, HANDLER.ADMIN_HANDLER.reportFi
 // ** GET API
 router.post('/getUserFilterReportList', auth, HANDLER.ADMIN_HANDLER.getAllReportPartnersUserFilterHandler);
 // ** GET API
-router.get('/getPartner/:id', auth, HANDLER.PARTNER_HANDLER.getPartnerByIdHandler);
+router.get('/getPartner/:id', HANDLER.PARTNER_HANDLER.getPartnerByIdHandler);
 
 router.get('/getUser/:id', HANDLER.PARTNER_HANDLER.getUserByIdHandler);
 

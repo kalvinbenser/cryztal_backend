@@ -78,6 +78,40 @@ export async function adminPartnerRegistration(req: any, res: Response): Promise
 }
 /**
  *
+ * @param {Request} req -- Request handler from Express.
+ * @param {Response} res -- Response sent to express from DB.
+ * @returns {Response} -- Fetched DATA JSON.
+ */
+export async function PartnerRegistration(req: any, res: Response): Promise<Response<any, Record<string, any>>> {
+    try {
+        const referenceCode = referralCodeGenerator.custom('uppercase', 6, 4, 'temitope');
+        const partnerService = new PARTNER_SERVICE.PartnerService();
+        const data = req.body;
+        data.reference_code = referenceCode;
+        const getPassword = await passwordGenerate();
+        const response = await partnerService.createPartner(req.body, getPassword[1], referenceCode);
+
+        partnerService.adminPartnerMailSend(req.body, getPassword[0]);
+        const value = response.id;
+        await partnerService.shopImageUpload(req, value);
+        await partnerService.shopLogo(req, value);
+        if (response) {
+            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            RESPONSE.Success.data = { id: response?.id };
+            return res.status(StatusCode.CREATED.code).send(RESPONSE.Success);
+        } else {
+            RESPONSE.Failure.Message = MESSAGE.INVALID_ID;
+            return res.status(StatusCode.FORBIDDEN.code).send(RESPONSE.Failure);
+        }
+    } catch (e: any) {
+        RESPONSE.Failure.Message = e.message;
+        log.error(e);
+        return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.Failure);
+    }
+}
+
+/**
+ *
  */
 function passwordGenerate() {
     // eslint-disable-next-line no-async-promise-executor

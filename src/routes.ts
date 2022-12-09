@@ -191,7 +191,11 @@ router.post(
     //validateRequest(SCHEMA.ADMIN_PARTNER_SCHEMA.createAdminPartner),
     HANDLER.ADMIN_HANDLER.adminPartnerRegistration,
 );
-
+router.post(
+    '/createRegistrationPartner',
+    //validateRequest(SCHEMA.ADMIN_PARTNER_SCHEMA.createAdminPartner),
+    HANDLER.ADMIN_HANDLER.PartnerRegistration,
+);
 // !TODO -- DEALS
 
 // ** GET LIST API

@@ -71,7 +71,49 @@ export class PartnerService {
             return error;
         }
     }
+    /**
+     *
+     * @param {any} req -- From Request body object
+     * @param {any} getPassword -- From Request body object
+     * @param {any} password_ori
+     * @returns {any} -- DB response SQL Response
+     */
+    async createPartner(req: any, getPassword: any, password_ori: string): Promise<any> {
+        const partner = new PRIMARY.PARTNER.Partner();
 
+        partner.store_name = req.store_name;
+        partner.type_of_store = req.type_of_store;
+        partner.ABN_number = req.ABN_number;
+        partner.GST_number = req.GST_number;
+        partner.contact_person_name = req.contact_person_name;
+        partner.primary_contact = req.primary_contact;
+        partner.secondary_contact = req.secondary_contact;
+        partner.store_email = req.email;
+        partner.country = req.country;
+        partner.state = req.state;
+        partner.address = req.address;
+        partner.suburb = req.suburb;
+        partner.zipcode = req.zipcode;
+        partner.discount = req.discount;
+        partner.shop_description = req.shop_description;
+        partner.shop_logo = req.shop_logo;
+        partner.shop_images = req.shop_images;
+        partner.latitude = req.latitude;
+        partner.longitude = req.longitude;
+        partner.store_status = 0;
+        partner.isShop = 2;
+        partner.admin_create = 0;
+        partner.password = getPassword;
+        partner.password_ori = password_ori;
+        partner.reference_code = req.reference_code;
+
+        try {
+            return this.partnerRepository.save(partner);
+        } catch (error) {
+            log.error(error);
+            return error;
+        }
+    }
     /**
      *
      /**

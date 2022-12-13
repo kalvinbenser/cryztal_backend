@@ -255,7 +255,7 @@ router.post(
 
 router.post(
     '/checkActivationPartner',
-    validateRequest(SCHEMA.PARTNER_SCHEMA.checkPartnerSchema),
+    //validateRequest(SCHEMA.PARTNER_SCHEMA.checkPartnerSchema),
     HANDLER.PARTNER_HANDLER.checkActivationPartnerHandler,
 );
 // ** GET API

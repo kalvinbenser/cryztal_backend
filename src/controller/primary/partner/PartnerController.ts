@@ -494,7 +494,7 @@ export async function checkActivationPartnerHandler(
 ): Promise<Response<any, Record<string, any>>> {
     try {
         const privacyPolicyService = new PARTNER_SERVICE.PartnerService();
-        const fir_uuid = +req.params.id;
+        const fir_uuid = req.body.id;
         const response = await privacyPolicyService.checkExistingPartner(fir_uuid);
 
         console.log(response.store_status);

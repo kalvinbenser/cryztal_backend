@@ -60,6 +60,7 @@ export type Deals = {
     image: string;
     reference_code: string;
     status: number;
+    delete_status: number;
     created_by?: Date;
     updated_by?: Date;
     created_on?: string;

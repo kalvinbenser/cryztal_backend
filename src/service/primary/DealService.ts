@@ -506,4 +506,23 @@ export class DealsService {
             return error;
         }
     }
+    /**
+     *
+     * @param {TYPES.Deals} req -- From Request body object
+     * @param {number} id  -- Unique id for th table Deals
+     * @returns {any} -- DB response SQL Response
+     */
+    async deleteMobileDeal(req: TYPES.Deals, id: number): Promise<any> {
+        try {
+            return this.dealRepository.update(
+                { id: id },
+                {
+                    delete_status: 1,
+                },
+            );
+        } catch (error) {
+            log.error(error);
+            return error;
+        }
+    }
 }

@@ -358,3 +358,27 @@ export async function updateQuraintinStatusId(
         return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.ServerFailure);
     }
 }
+/**
+ *
+ * @param {Request} req  -- Express Request -BODY/PARAMS
+ * @param {Response} res -- Express response from DB
+ */
+export async function deleteDealsById(req: Request, res: Response): Promise<Response<any, Record<string, any>>> {
+    try {
+        const dealService = new DEALS_SERVICE.DealsService();
+        const id = +req.params.id;
+        const response = await dealService.deleteMobileDeal(req.body, id);
+        if (response?.affected) {
+            RESPONSE.Success.data = response;
+            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
+        } else {
+            RESPONSE.Failure.Message = MESSAGE.INVALID_DATA;
+            return res.status(StatusCode.FORBIDDEN.code).send(RESPONSE.Failure);
+        }
+    } catch (e: any) {
+        RESPONSE.Failure.Message = e.message;
+        log.error(e);
+        return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.ServerFailure);
+    }
+}

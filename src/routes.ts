@@ -225,7 +225,8 @@ router.put(
 
 // ** GET API
 router.get('/getDeal/:id', auth, HANDLER.DEALS_HANDLER.getDealsByIdHandler);
-
+// ** GET API
+router.delete('/deleteMobileDeals/:id', HANDLER.DEALS_HANDLER.deleteDealsById);
 // !TODO -- Customer
 
 // ** GET API

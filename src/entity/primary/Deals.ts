@@ -50,6 +50,9 @@ export class Deals {
     @Column({ type: 'int', nullable: false, default: 0 })
     status: number;
 
+    @Column({ type: 'varchar', default: 0 })
+    delete_status: number;
+
     @Column({ type: 'varchar', nullable: true })
     created_by?: Date;
 

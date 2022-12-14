@@ -176,7 +176,7 @@ router.get('/getPartnerReports/:id', auth, HANDLER.PARTNER_HANDLER.getPartnerByI
 router.put(
     '/partnerApproval/:id',
     auth,
-    validateRequest(SCHEMA.PARTNER_SCHEMA.updatePartnerSchema),
+    //validateRequest(SCHEMA.PARTNER_SCHEMA.updatePartnerSchema),
     HANDLER.ADMIN_HANDLER.updatePartnerById,
 );
 

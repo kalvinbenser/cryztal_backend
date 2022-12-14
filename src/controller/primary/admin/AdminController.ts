@@ -542,7 +542,8 @@ export async function updatePartnerById(req: Request, res: Response): Promise<Re
         const PartnerRegistrationService = new PARTNER_SERVICE.PartnerService();
         const id = +req.params.id;
         const response = await PartnerRegistrationService.updatePartner(req.body, id);
-
+        await PartnerRegistrationService.shopImageUpload(req, id);
+        await PartnerRegistrationService.shopLogo(req, id);
         if (response?.affected) {
             RESPONSE.Success.data = response;
             RESPONSE.Success.Message = MESSAGE.SUCCESS;

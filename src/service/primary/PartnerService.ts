@@ -136,6 +136,7 @@ export class PartnerService {
         partner.user_zipcode = req.user_zipcode;
         partner.user_suburb = req.user_suburb;
         partner.password_ori = req.password;
+        partner.status = 1;
 
         try {
             return this.partnerRepository.save(partner);

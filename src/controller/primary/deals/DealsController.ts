@@ -163,7 +163,10 @@ export async function updateDealsById(req: Request, res: Response): Promise<Resp
         const dealService = new DEALS_SERVICE.DealsService();
         const id = +req.params.id;
         const response = await dealService.update(req.body, id);
-        await dealService.dealimageUpload(req, id);
+        if (req.body.image != '') {
+            await dealService.dealimageUpload(req, id);
+        }
+
         if (response?.affected) {
             RESPONSE.Success.data = response;
             RESPONSE.Success.Message = MESSAGE.SUCCESS;

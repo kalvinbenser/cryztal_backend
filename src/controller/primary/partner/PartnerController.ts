@@ -64,7 +64,6 @@ export async function createPartnerHandler(req: any, res: Response): Promise<Res
             const response = await partnerService.register({ req: req.body });
             const data1 = response.id;
             await partnerService.profileImage(req, data1);
-
             RESPONSE.Success.Message = MESSAGE.PARTNER_SUCCESS;
             RESPONSE.Success.data = { id: response?.id };
             return res.status(StatusCode.CREATED.code).send(RESPONSE.Success);
@@ -75,6 +74,7 @@ export async function createPartnerHandler(req: any, res: Response): Promise<Res
     } catch (e: any) {
         RESPONSE.Failure.Message = e.message;
         log.error(e);
+        RESPONSE.Failure.Message = MESSAGE.MAIL;
         return res.status(StatusCode.NON_AUTHORITATIVE_INFORMATION.code).send(RESPONSE.Failure);
     }
 }

@@ -22,5 +22,5 @@ export const MESSAGE = {
     INCORRECT_PASSWORD: 'Incorrect Password',
     DOES_NOT_MATCH: ' Password Does Not Match',
     PASSWORD_8: 'password must be at least 8 characters',
-    MAIL: 'Mail is already registered',
+    MAIL: 'The email already exists, Please try again',
 };

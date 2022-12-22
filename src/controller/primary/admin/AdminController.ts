@@ -106,6 +106,7 @@ export async function PartnerRegistration(req: any, res: Response): Promise<Resp
     } catch (e: any) {
         RESPONSE.Failure.Message = e.message;
         log.error(e);
+        RESPONSE.Failure.Message = MESSAGE.MAIL;
         return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.Failure);
     }
 }

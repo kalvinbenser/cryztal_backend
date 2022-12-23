@@ -23,4 +23,6 @@ export const MESSAGE = {
     DOES_NOT_MATCH: ' Password Does Not Match',
     PASSWORD_8: 'password must be at least 8 characters',
     MAIL: 'The email already exists, Please try again',
+    DEAL: 'Your deal is updates',
+    DELETE_DEALS: 'Your deal is deleted',
 };

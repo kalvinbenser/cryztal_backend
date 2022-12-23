@@ -169,7 +169,7 @@ export async function updateDealsById(req: Request, res: Response): Promise<Resp
 
         if (response?.affected) {
             RESPONSE.Success.data = response;
-            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            RESPONSE.Success.Message = MESSAGE.DEAL;
             return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         } else {
             RESPONSE.Failure.Message = MESSAGE.INVALID_DATA;
@@ -373,7 +373,7 @@ export async function deleteDealsById(req: Request, res: Response): Promise<Resp
         const response = await dealService.deleteMobileDeal(req.body, id);
         if (response?.affected) {
             RESPONSE.Success.data = response;
-            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            RESPONSE.Success.Message = MESSAGE.DELETE_DEALS;
             return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         } else {
             RESPONSE.Failure.Message = MESSAGE.INVALID_DATA;

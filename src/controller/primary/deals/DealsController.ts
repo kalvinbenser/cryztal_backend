@@ -178,6 +178,7 @@ export async function updateDealsById(req: Request, res: Response): Promise<Resp
     } catch (e: any) {
         RESPONSE.Failure.Message = e.message;
         log.error(e);
+        RESPONSE.Failure.Message = MESSAGE.WRONG;
         return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.ServerFailure);
     }
 }

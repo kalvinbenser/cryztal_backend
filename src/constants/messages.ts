@@ -25,4 +25,5 @@ export const MESSAGE = {
     MAIL: 'The email already exists, Please try again',
     DEAL: 'Your deal is updates',
     DELETE_DEALS: 'Your deal is deleted',
+    WRONG: 'Something went wrong',
 };

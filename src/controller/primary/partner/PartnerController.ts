@@ -700,7 +700,7 @@ export async function updatePartnerProfileAppById(
             RESPONSE.Success.Message = MESSAGE.SUCCESS;
             return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         } else {
-            RESPONSE.Failure.Message = MESSAGE.INVALID_DATA;
+            RESPONSE.Failure.Message = MESSAGE.WRONG;
             return res.status(StatusCode.FORBIDDEN.code).send(RESPONSE.Failure);
         }
     } catch (e: any) {

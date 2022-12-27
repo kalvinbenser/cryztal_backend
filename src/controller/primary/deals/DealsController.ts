@@ -172,7 +172,7 @@ export async function updateDealsById(req: Request, res: Response): Promise<Resp
             RESPONSE.Success.Message = MESSAGE.DEAL;
             return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         } else {
-            RESPONSE.Failure.Message = MESSAGE.INVALID_DATA;
+            RESPONSE.Failure.Message = MESSAGE.WRONG;
             return res.status(StatusCode.FORBIDDEN.code).send(RESPONSE.Failure);
         }
     } catch (e: any) {

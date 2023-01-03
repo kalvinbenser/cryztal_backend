@@ -163,18 +163,22 @@ export async function updateDealsById(req: Request, res: Response): Promise<Resp
         const dealService = new DEALS_SERVICE.DealsService();
         const id = +req.params.id;
         const response = await dealService.update(req.body, id);
-        await dealService.dealimageUpload(req.body, id);
+        if (req.body.image != '') {
+            await dealService.dealimageUpload(req, id);
+        }
+
         if (response?.affected) {
             RESPONSE.Success.data = response;
-            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            RESPONSE.Success.Message = MESSAGE.DEAL;
             return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         } else {
-            RESPONSE.Failure.Message = MESSAGE.INVALID_DATA;
+            RESPONSE.Failure.Message = MESSAGE.WRONG;
             return res.status(StatusCode.FORBIDDEN.code).send(RESPONSE.Failure);
         }
     } catch (e: any) {
         RESPONSE.Failure.Message = e.message;
         log.error(e);
+        RESPONSE.Failure.Message = MESSAGE.WRONG;
         return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.ServerFailure);
     }
 }
@@ -370,7 +374,7 @@ export async function deleteDealsById(req: Request, res: Response): Promise<Resp
         const response = await dealService.deleteMobileDeal(req.body, id);
         if (response?.affected) {
             RESPONSE.Success.data = response;
-            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            RESPONSE.Success.Message = MESSAGE.DELETE_DEALS;
             return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         } else {
             RESPONSE.Failure.Message = MESSAGE.INVALID_DATA;

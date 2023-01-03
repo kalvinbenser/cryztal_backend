@@ -1,5 +1,5 @@
 export const MESSAGE = {
-    PARTNER_SUCCESS: ' registration done successfully',
+    PARTNER_SUCCESS: ' Registered Successfully',
     SUBCATEGORY: 'Sub Category done Successfully',
     PRIVACY: 'Privacy Policy done Successfully',
     CATEGORY_SUCCESS: 'Category created successfully',
@@ -22,4 +22,8 @@ export const MESSAGE = {
     INCORRECT_PASSWORD: 'Incorrect Password',
     DOES_NOT_MATCH: ' Password Does Not Match',
     PASSWORD_8: 'password must be at least 8 characters',
+    MAIL: 'The email already exists, Please try again',
+    DEAL: 'Your deal is updates',
+    DELETE_DEALS: 'Your deal is deleted',
+    WRONG: 'Something went wrong',
 };

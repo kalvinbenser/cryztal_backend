@@ -21,7 +21,7 @@ export class Partner {
     @Column({ type: 'varchar', nullable: true, unique: true })
     email?: string;
 
-    @Column({ type: 'varchar', nullable: true, unique: true })
+    @Column({ type: 'varchar', nullable: true })
     phone_number?: string;
 
     @Column({ type: 'varchar', nullable: true })

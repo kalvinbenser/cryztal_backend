@@ -1033,4 +1033,20 @@ export class PartnerService {
             return error;
         }
     }
+    /**
+     
+     * @param user_state
+     * @param user_zipcode
+     * @param user_suburb
+     * @param phone_number
+     * @returns {any} -- DB response SQL Response
+     */
+    async checkNumber(phone_number: string): Promise<any> {
+        try {
+            return this.partnerRepository.query('call cryztal_test_v1.sp_checkNumber(?)', [phone_number]);
+        } catch (error) {
+            log.error(error);
+            return error;
+        }
+    }
 }

@@ -468,4 +468,6 @@ router.get('/getMyWishListById/:wish_list_id', HANDLER.WISH_LIST_HANDLER.getMyWi
 router.get('/getMyWishListAdminUserById/:user_id', auth, HANDLER.WISH_LIST_HANDLER.getMyWishListByAdminIdHandler);
 
 router.post('/imageUpload', HANDLER.IMAGE_UPLOAD_HANDLER.imageUploadHandler);
+
+router.post('/checkMobileNumber', HANDLER.ADMIN_HANDLER.cheakNumber);
 export default router;

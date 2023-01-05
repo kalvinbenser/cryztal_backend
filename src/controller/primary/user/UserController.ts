@@ -483,7 +483,7 @@ export async function userLoginHandler(req: Request, res: Response): Promise<Res
             const validPassword = await bcrypt.compare(req.body.password, response?.password);
             if (validPassword) {
                 RESPONSE.Success.Message = MESSAGE.LOGIN;
-                RESPONSE.Success.data = { user_id: response?.id };
+                RESPONSE.Success.data = { user_id: response?.id, isShop: response?.isShop };
                 return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
             } else {
                 RESPONSE.Success.Message = 'Invalid credentials';

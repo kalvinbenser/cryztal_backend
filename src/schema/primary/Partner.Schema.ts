@@ -24,7 +24,16 @@ export const updateUserProfileSchema = object({
         location: string().notRequired(),
     }),
 });
-
+export const updatePartnerToUserSchema = object({
+    body: object({
+        name: string().notRequired(),
+        email: string().matches(PATTERN.emailRegExp, 'Email is not valid').notRequired(),
+        phone_number: string().matches(PATTERN.phoneRegExp, 'Phone number is not valid').notRequired(),
+        password: string().matches(PATTERN.PASSWORD, 'password too weak').notRequired(),
+        // profile_image: string().notRequired(),
+        location: string().notRequired(),
+    }),
+});
 export const createPartnerSchema = object({
     body: object({
         store_name: string().required('store_name is required'),

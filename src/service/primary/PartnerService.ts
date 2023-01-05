@@ -566,6 +566,35 @@ export class PartnerService {
      * @param {number} id -- Unique id for th table Partner
      * @returns {any} -- DB response SQL Response
      */
+    async updatePartnerToUserApp(req: any, id: number): Promise<any> {
+        try {
+            const salt = await bcrypt.genSalt(10);
+            const password = req.password || 'password';
+            const hashPassword = await bcrypt.hash(password, salt);
+            return this.partnerRepository.update(
+                {
+                    id: id,
+                },
+                {
+                    name: req.name,
+                    email: req.email,
+                    password: hashPassword,
+                    password_ori: password,
+                    phone_number: req.phone_number,
+                    location: req.location,
+                },
+            );
+        } catch (error) {
+            log.error(error);
+            return error;
+        }
+    }
+    /**
+     *
+     * @param {any} req -- From Request body object
+     * @param {number} id -- Unique id for th table Partner
+     * @returns {any} -- DB response SQL Response
+     */
     async updatePartnerProfileApp(req: any, id: number): Promise<any> {
         try {
             return this.partnerRepository.update(

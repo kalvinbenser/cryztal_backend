@@ -288,6 +288,11 @@ router.put(
     validateRequest(SCHEMA.PARTNER_SCHEMA.UpdatePartner),
     HANDLER.PARTNER_HANDLER.updatePartnerProfileAppById,
 );
+router.put(
+    '/updatePartnerToUserById/:id',
+    validateRequest(SCHEMA.PARTNER_SCHEMA.updatePartnerToUserSchema),
+    HANDLER.PARTNER_HANDLER.updatePartnerToUserAppById,
+);
 router.get('/getUser/:id', HANDLER.PARTNER_HANDLER.getUserByIdHandler);
 
 // !! NEW API ** USER IS REGISTERED

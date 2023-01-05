@@ -709,3 +709,32 @@ export async function updatePartnerProfileAppById(
         return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.ServerFailure);
     }
 }
+/**
+ *
+ * @param {any} req  -- Express Request -BODY/PARAMS
+ * @param {Response} res -- Express response from DB
+ */
+export async function updatePartnerToUserAppById(req: any, res: Response): Promise<Response<any, Record<string, any>>> {
+    try {
+        const PartnerRegistrationService = new PARTNER_SERVICE.PartnerService();
+        const id = +req.params.id;
+        const response = await PartnerRegistrationService.updatePartnerToUserApp(req.body, id);
+
+        if (req.files != null) {
+            await PartnerRegistrationService.profileImage(req, id);
+        }
+
+        if (response?.affected) {
+            RESPONSE.Success.data = response;
+            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
+        } else {
+            RESPONSE.Failure.Message = MESSAGE.INVALID_DATA;
+            return res.status(StatusCode.FORBIDDEN.code).send(RESPONSE.Failure);
+        }
+    } catch (e: any) {
+        RESPONSE.Failure.Message = e.message;
+        log.error(e);
+        return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.ServerFailure);
+    }
+}

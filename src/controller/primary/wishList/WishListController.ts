@@ -116,3 +116,31 @@ export async function getMyWishListByAdminIdHandler(
         return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.ServerFailure);
     }
 }
+/**
+ *
+ * @param {Request} req  -- Express Request -BODY/PARAMS
+ * @param {Response} res -- Express response from DB
+ */
+export async function getViewDashboardCountHandler(
+    req: Request,
+    res: Response,
+): Promise<Response<any, Record<string, any>>> {
+    try {
+        const dashboard = new WISHLIST_SERVICE.WishListService();
+        const id = +req.params.id;
+        const response = await dashboard.getViewCount(id);
+
+        if (response) {
+            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            RESPONSE.Success.data = response;
+            return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
+        } else {
+            RESPONSE.Failure.Message = MESSAGE.INVALID_ID;
+            return res.status(StatusCode.FORBIDDEN.code).send(RESPONSE.Failure);
+        }
+    } catch (e: any) {
+        RESPONSE.Failure.Message = e.message;
+        log.error(e);
+        return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.ServerFailure);
+    }
+}

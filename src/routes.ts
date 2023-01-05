@@ -451,7 +451,7 @@ router.post(
 // ** CREATE API
 router.post(
     '/insertWishList',
-    validateRequest(SCHEMA.WISH_LIST_SCHEMA.createWishListSchema),
+    //validateRequest(SCHEMA.WISH_LIST_SCHEMA.createWishListSchema),
     HANDLER.WISH_LIST_HANDLER.createWishListHandler,
 );
 // ** GET LIST API
@@ -463,6 +463,7 @@ router.post(
 // ** GET LIST API
 router.get('/getMyWishListById/:wish_list_id', HANDLER.WISH_LIST_HANDLER.getMyWishListByIdHandler);
 
+router.get('/getTotalViews/:id', HANDLER.WISH_LIST_HANDLER.getViewDashboardCountHandler);
 // !TODO -- Customer
 // ** GET LIST API
 router.get('/getMyWishListAdminUserById/:user_id', auth, HANDLER.WISH_LIST_HANDLER.getMyWishListByAdminIdHandler);

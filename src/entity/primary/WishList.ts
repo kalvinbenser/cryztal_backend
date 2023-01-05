@@ -29,7 +29,7 @@ export class WishList {
     updated_by?: string;
 
     @Column({ type: 'varchar', nullable: false, default: CurrentDate.toString() })
-    created_on?: Date;
+    created_on?: string;
 
     @Column({ type: 'varchar', nullable: true })
     updated_on?: Date;

@@ -2,6 +2,8 @@ import { AppDataSource } from '../../data-source';
 import { PRIMARY } from '../../entity';
 import * as TYPES from '../../types/WishListTypes';
 import log from '../../logger/logger';
+import * as moment from 'moment';
+const CurrentDate = moment().format();
 /**
  *
  */
@@ -79,6 +81,44 @@ export class WishListService {
                     partner_id: req,
                 },
             });
+        } catch (error) {
+            log.error(error);
+            return error;
+        }
+    }
+    /**
+     * @param {string} id --partner id
+     * @returns {any} -- DB response SQL Response
+     */
+    async getViewCount(id: number): Promise<any> {
+        try {
+            const data: any = {
+                totalViews: 0,
+                todayViews: 0,
+            };
+            data.totalViews = await this.wishListRepository.count({
+                relations: {
+                    partner_id: true,
+                },
+                where: {
+                    partner_id: {
+                        id: id,
+                    },
+                },
+            });
+            data.todayViews = await this.wishListRepository.count({
+                relations: {
+                    partner_id: true,
+                },
+                where: {
+                    partner_id: {
+                        id: id,
+                    },
+                    created_on: CurrentDate,
+                },
+            });
+
+            return data;
         } catch (error) {
             log.error(error);
             return error;

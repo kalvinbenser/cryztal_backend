@@ -7,6 +7,6 @@ export type WishList = {
     partner_id: Partner;
     created_by?: string;
     updated_by?: string;
-    created_on?: Date;
+    created_on?: string;
     updated_on?: Date;
 };

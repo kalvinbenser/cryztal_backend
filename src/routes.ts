@@ -476,4 +476,6 @@ router.get('/getMyWishListAdminUserById/:user_id', auth, HANDLER.WISH_LIST_HANDL
 router.post('/imageUpload', HANDLER.IMAGE_UPLOAD_HANDLER.imageUploadHandler);
 
 router.post('/checkMobileNumber', HANDLER.ADMIN_HANDLER.cheakNumber);
+
+router.get('/getCategoryByUserId/:id', HANDLER.USER_HANDLER.getUserCategoryDropdownHandler);
 export default router;

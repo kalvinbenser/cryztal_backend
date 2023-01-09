@@ -633,9 +633,9 @@ export async function updatePartnerAppById(req: any, res: Response): Promise<Res
         if (req.files != null) {
             await PartnerRegistrationService.shopImageUpload(req, id);
             await PartnerRegistrationService.shopLogo(req, id);
-            if (response?.affected) {
-                RESPONSE.Success.data = response;
-                RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            if (response) {
+                RESPONSE.Success.data = id;
+                RESPONSE.Success.Message = MESSAGE.REGISTRATION_SUCCESS;
                 return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
             } else {
                 RESPONSE.Failure.Message = MESSAGE.INVALID_DATA;
@@ -724,9 +724,9 @@ export async function updatePartnerToUserAppById(req: any, res: Response): Promi
             await PartnerRegistrationService.profileImage(req, id);
         }
 
-        if (response?.affected) {
-            RESPONSE.Success.data = response;
-            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+        if (response) {
+            RESPONSE.Success.data = id;
+            RESPONSE.Success.Message = MESSAGE.PARTNER_SUCCESS;
             return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
         } else {
             RESPONSE.Failure.Message = MESSAGE.INVALID_DATA;

@@ -275,7 +275,7 @@ router.post(
 );
 router.put(
     '/updateAsPartner/:id',
-    validateRequest(SCHEMA.PARTNER_SCHEMA.createPartnerSchema),
+    //validateRequest(SCHEMA.PARTNER_SCHEMA.createPartnerSchema),
     HANDLER.PARTNER_HANDLER.updatePartnerAppById,
 );
 router.put(

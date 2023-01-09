@@ -738,3 +738,37 @@ export async function updatePartnerToUserAppById(req: any, res: Response): Promi
         return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.ServerFailure);
     }
 }
+/**
+ *
+ * @param {Request} req -- Request handler from Express.
+ * @param {Response} res -- Response sent to express from DB.
+ * @returns {Response} -- Fetched DATA JSON.
+ */
+export async function getCategoryByUserIdHandler(
+    req: Request,
+    res: Response,
+): Promise<Response<any, Record<string, any>>> {
+    try {
+        const PartnerRegistrationService = new PARTNER_SERVICE.PartnerService();
+        const id = +req.params?.id;
+        const response = await PartnerRegistrationService.getCategoryByUserId(id);
+        response.type_of_store = JSON.parse(response.type_of_store);
+        type ObjectType = {
+            category_master: string;
+        };
+        const result: ObjectType[] = response.type_of_store.map((str: any) => ({ category_master: str }));
+        // eslint-disable-next-line no-constant-condition
+        if (result) {
+            RESPONSE.Success.data = result;
+            RESPONSE.Success.Message = MESSAGE.SUCCESS;
+            return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
+        } else {
+            RESPONSE.Failure.Message = MESSAGE.INVALID_ID;
+            return res.status(StatusCode.NOT_FOUND.code).send(RESPONSE.Failure);
+        }
+    } catch (e: any) {
+        RESPONSE.Failure.Message = e.message;
+        log.error(e);
+        return res.status(StatusCode.SERVER_ERROR.code).send(RESPONSE.ServerFailure);
+    }
+}

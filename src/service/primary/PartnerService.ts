@@ -1078,4 +1078,22 @@ export class PartnerService {
             return error;
         }
     }
+    /**
+     *
+     * @param {TYPES.Partner} id -- From Request body object
+     * @param {TYPES.Partner} isShop -- to check whether it is a user or not
+     * @returns {any} -- DB response SQL Response
+     */
+    async getCategoryByUserId(id: number) {
+        try {
+            return this.partnerRepository.findOne({
+                where: {
+                    id: id,
+                },
+            });
+        } catch (error) {
+            log.error(error);
+            return error;
+        }
+    }
 }

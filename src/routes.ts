@@ -477,5 +477,5 @@ router.post('/imageUpload', HANDLER.IMAGE_UPLOAD_HANDLER.imageUploadHandler);
 
 router.post('/checkMobileNumber', HANDLER.ADMIN_HANDLER.cheakNumber);
 
-router.get('/getCategoryByUserId/:id', HANDLER.USER_HANDLER.getUserCategoryDropdownHandler);
+router.get('/getCategoryByUserId/:id', HANDLER.PARTNER_HANDLER.getCategoryByUserIdHandler);
 export default router;

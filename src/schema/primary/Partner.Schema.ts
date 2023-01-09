@@ -39,7 +39,7 @@ export const createPartnerSchema = object({
         store_name: string().required('store_name is required'),
         type_of_store: string().required('type_of_store is required'),
         shop_description: string().required('shop_description  is required'),
-        ABN_number: string().matches(PATTERN.ABNRegExp, 'ABN number is not valid').required('ABN_number is required'),
+        ABN_number: string().matches(PATTERN.ABNRegExp, 'ABN number is not valid').notRequired(),
         GST_number: string().notRequired(),
         address: string().required('address is required'),
         state: string().required('state is required'),

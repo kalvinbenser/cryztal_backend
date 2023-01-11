@@ -379,13 +379,21 @@ export async function getUserSubCategoryDropdownHandler(
         const dealService = new USER_SERVICE.userService();
         const category_id = req.body.category_id;
         const response = await dealService.getUserSubCategoryDeals(category_id);
-        const result = _.map(response, (obj) => {
+
+        const result: any = _.map(response, (obj) => {
             return _.omit(obj, default_omit_arr, ['category_id'], ['status'], ['sub_category_id']);
         });
-        if (result.length) {
+        result.unshift({});
+        if (result) {
             RESPONSE.Success.Message = MESSAGE.SUCCESS;
-            RESPONSE.Success.data = result;
-            return res.status(StatusCode.ACCEPTED.code).send(RESPONSE.Success);
+            const data: any = {
+                Status: true,
+                Success: true,
+                Message: 'SUCCESS',
+                data: result,
+            };
+            // RESPONSE.Success.data = result;
+            return res.status(StatusCode.ACCEPTED.code).send(data);
         } else {
             RESPONSE.Success.Message = MESSAGE.SUCCESS;
             RESPONSE.Success.data = result;
